@@ -1,196 +1,174 @@
 # Linux Cheat Sheet for Cloud & DevOps Engineer
 
-A practical reference guide covering fundamental Linux commands, system management, networking, and DevOps-related operations. Suitable for beginners and professionals.
+## 1. Linux Directory Structure
+
+| Directory | Description                                   |
+|-----------|-----------------------------------------------|
+| /         | Root directory                                |
+| /bin      | Essential user binaries                        |
+| /sbin     | System binaries                               |
+| /etc      | All system Configuration files                |
+| /dev      | Device files                                  |
+| /proc     | Virtual filesystem for kernel and process info|
+| /var      | Variable data files (logs, databases)         |
+| /tmp      | Temporary files                               |
+| /home     | User home directories                         |
+| /boot     | Boot loader files                             |
+| /mnt      | Mount point for temporary mounts              |
+| /opt      | Optional application software packages (3rd party) |
+| /media    | Mount point for removable media               |
 
 ---
 
-## 📁 1. Linux Directory Structure
+## 2. User and Group Management
 
-| Directory | Description |
-|----------|-------------|
-| `/` | Root directory |
-| `/bin` | Essential user binaries |
-| `/sbin` | System binaries |
-| `/etc` | System configuration files |
-| `/dev` | Device files |
-| `/proc` | Virtual filesystem for kernel and process info |
-| `/var` | Variable data files (logs, dbs) |
-| `/tmp` | Temporary files |
-| `/home` | User home directories |
-| `/boot` | Boot loader files |
-| `/mnt` | Mount point for temporary mounts |
-| `/opt` | Optional third-party packages |
-| `/media` | Mount point for removable media |
+| Command                     | Description               | Example              |
+|-----------------------------|---------------------------|----------------------|
+| `useradd <username>`         | Add a new user            | `useradd test`       |
+| `adduser <username>`         | Add new user with home dir| `adduser test1`      |
+| `passwd <username>`          | Set user password         | `passwd test`        |
+| `userdel <username>`         | Delete a user             | `userdel test`       |
+| `passwd -l <username>`       | Lock a user account       | `passwd -l test`     |
+| `passwd -u <username>`       | Unlock a user account     | `passwd -u test`     |
+| `usermod -l <new> <old>`     | Rename a user             | `usermod -l test2 test` |
+| `groupadd <groupname>`       | Add a new group           | `groupadd IT`        |
+| `groupdel <groupname>`       | Delete a group            | `groupdel IT`        |
+| `usermod -aG <group> <user>` | Add user to group         | `usermod -aG IT test`|
 
 ---
 
-## 👥 2. User and Group Management
+## 3. File and Directory Operations
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `useradd <username>` | Add a new user | `useradd test` |
-| `adduser <username>` | Add user with home dir | `adduser test1` |
-| `passwd <username>` | Set user password | `passwd test` |
-| `userdel <username>` | Delete a user | `userdel test` |
-| `passwd -l <username>` | Lock user account | `passwd -l test` |
-| `passwd -u <username>` | Unlock user account | `passwd -u test` |
-| `usermod -l <new> <old>` | Rename user | `usermod -l test2 test` |
-| `groupadd <groupname>` | Add new group | `groupadd IT` |
-| `groupdel <groupname>` | Delete group | `groupdel IT` |
-| `usermod -aG <group> <user>` | Add user to group | `usermod -aG IT test` |
-
----
-
-## 📂 3. File and Directory Operations
-
-| Command | Description | Example |
-|--------|-------------|---------|
-| `ls` | List contents | `ls` |
-| `ls -l` | Detailed list | `ls -l` |
-| `pwd` | Show current directory | `pwd` |
-| `cd <dir>` | Change directory | `cd /home` |
-| `mkdir <dir>` | Create directory | `mkdir newfolder` |
-| `rm <file>` | Remove file | `rm file.txt` |
-| `rmdir <dir>` | Remove empty dir | `rmdir newfolder` |
-| `touch <file>` | Create file | `touch newfile.txt` |
-| `cp <src> <dst>` | Copy files | `cp file.txt /backup/` |
-| `mv <src> <dst>` | Move/rename file | `mv old.txt new.txt` |
-| `cat <file>` | Show file content | `cat file.txt` |
-| `head <file>` | First 10 lines | `head -10 file.txt` |
-| `tail <file>` | Last 10 lines | `tail -10 file.txt` |
-| `vi <file>` | Open in vi | `vi file.txt` |
-| `vim <file>` | Open in vim | `vim file.txt` |
+| Command               | Description                     | Example               |
+|-----------------------|---------------------------------|-----------------------|
+| `ls`                  | List directory contents          | `ls`                  |
+| `ls -l`               | List with detailed info          | `ls -l`               |
+| `pwd`                 | Print working directory          | `pwd`                 |
+| `cd <dir name>`       | Change directory                 | `cd /home`            |
+| `mkdir <dir name>`    | Create a new directory           | `mkdir newfolder`     |
+| `rm <file name>`      | Remove a file                   | `rm file.txt`         |
+| `rmdir <dir name>`    | Remove an empty directory        | `rmdir newfolder`     |
+| `touch <file name>`   | Create an empty file             | `touch newfile.txt`   |
+| `cp <src> <dest>`     | Copy a file or directory         | `cp file.txt /backup/`|
+| `mv <src> <dest>`     | Move or rename file/directory    | `mv oldname.txt newname.txt` |
+| `cat <file name>`     | Concatenate and display file     | `cat file.txt`        |
+| `head <file name>`    | Display first 10 lines           | `head -10 file.txt`   |
+| `tail <file name>`    | Display last 10 lines            | `tail -10 file.txt`   |
+| `vi <file name>`      | Open file in vi editor           | `vi file.txt`         |
+| `vim <file name>`     | Open file in vim editor          | `vim file.txt`        |
 
 ---
 
-## 🔐 4. File Permissions
+## 4. File Permissions
 
-### Permission Values:
 | Permission | Symbol | Value |
 |------------|--------|-------|
-| Read | `r` | 4 |
-| Write | `w` | 2 |
-| Execute | `x` | 1 |
+| Read       | r      | 4     |
+| Write      | w      | 2     |
+| Execute    | x      | 1     |
 
-> Examples:
-> - `rwx` = 7  
-> - `rw-` = 6  
-> - `r--` = 4  
+> Examples:  
+> rwx = 7 (4+2+1), rw- = 6 (4+2), r-- = 4, --- = 0
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `chmod <mode> <file>` | Change permissions | `chmod 444 file.txt` |
-| `chown <user>:<group> <file>` | Change owner/group | `chown test:IT file.txt` |
+| Command                        | Description             | Example              |
+|-------------------------------|-------------------------|----------------------|
+| `chmod <mode> <file>`          | Change file permissions | `chmod 444 file.txt` |
+| `chown <user>:<group> <file>`  | Change file owner/group | `chown test:IT file.txt` |
 
 ---
 
-## ⚙️ 5. Process Management
+## 5. Process Management
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `ps` | List processes | `ps` |
-| `ps aux` | Detailed info | `ps aux` |
-| `ps -ef` | Full format | `ps -ef` |
-| `kill <pid>` | Kill process | `kill 1234` |
-| `kill -9 <pid>` | Force kill | `kill -9 1234` |
-| `kill -STOP <pid>` | Pause process | `kill -STOP 1234` |
-| `kill -CONT <pid>` | Resume process | `kill -CONT 1234` |
-
----
-
-## 🧠 6. System Info & Monitoring
-
-| Command | Description | Example |
-|--------|-------------|---------|
-| `uname -a` | System info | `uname -a` |
-| `hostnamectl` | Hostname info | `hostnamectl` |
-| `uptime` | System uptime | `uptime` |
-| `whoami` | Current user | `whoami` |
-| `lscpu` | CPU info | `lscpu` |
-| `top` | Task manager | `top` |
-| `htop` | Interactive tasks | `htop` |
-| `free -h` | Memory usage | `free -h` |
-| `df -h` | Disk usage | `df -h` |
-| `du -sh <dir>` | Dir size | `du -sh /home/user` |
-| `vmstat` | VM stats | `vmstat` |
-| `nproc` | CPU cores | `nproc` |
+| Command          | Description                    | Example         |
+|------------------|--------------------------------|-----------------|
+| `ps`             | Display current processes       | `ps`            |
+| `ps aux`         | Detailed process info           | `ps aux`        |
+| `ps -ef`         | Full-format listing all processes | `ps -ef`     |
+| `kill <pid>`     | Terminate a process             | `kill 1234`     |
+| `kill -9 <pid>`  | Forcefully terminate a process  | `kill -9 1234`  |
+| `kill -STOP <pid>` | Pause a process               | `kill -STOP 1234` |
+| `kill -CONT <pid>` | Resume a paused process       | `kill -CONT 1234`|
 
 ---
 
-## 🌐 7. Networking
+## 6. System Information and Monitoring
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `ip a` | Show IP addresses | `ip a` |
-| `ifconfig` | Network config | `ifconfig` |
-| `ping <host>` | Test connection | `ping google.com` |
-| `traceroute <host>` | Trace path | `traceroute google.com` |
-| `nslookup <domain>` | DNS lookup | `nslookup google.com` |
-| `dig` | DNS queries | `dig google.com` |
-| `curl <url>` | HTTP request | `curl http://example.com` |
-| `wget <url>` | Download file | `wget http://example.com/file.zip` |
-| `ssh user@host` | Remote login | `ssh user@192.168.1.10` |
-| `scp <file> user@host:/path` | Secure copy | `scp file.txt user@host:/home/user/` |
-| `ftp <host>` | FTP access | `ftp ftp.example.com` |
-
----
-
-## 💾 8. Disk Management
-
-| Command | Description | Example |
-|--------|-------------|---------|
-| `lsblk` | List block devices | `lsblk` |
-| `fdisk -l` | List partitions | `fdisk -l` |
-| `mkfs.ext4 <device>` | Format partition | `mkfs.ext4 /dev/sdb1` |
-| `mount <device> <dir>` | Mount device | `mount /dev/sdb1 /mnt/data` |
-| `umount <dir>` | Unmount device | `umount /mnt/data` |
-| `sudo nano /etc/fstab` | Persistent mount config | `sudo nano /etc/fstab` |
+| Command         | Description                     | Example       |
+|-----------------|---------------------------------|---------------|
+| `uname`         | Shows system information         | `uname -a`    |
+| `hostnamectl`   | Displays or sets hostname info   | `hostnamectl` |
+| `uptime`        | Shows system uptime              | `uptime`      |
+| `whoami`        | Shows current logged-in user    | `whoami`      |
+| `lscpu`         | Displays CPU architecture details| `lscpu`       |
+| `top`           | Display task manager             | `top`         |
+| `htop`          | Interactive process viewer      | `htop`        |
+| `free -h`       | Display memory usage             | `free -h`     |
+| `df -h`         | Display disk space usage         | `df -h`       |
+| `du -sh <dir>`  | Display directory size           | `du -sh /home/user` |
+| `vmstat`        | Report virtual memory statistics | `vmstat`      |
+| `nproc`         | Show number of processing units | `nproc`       |
 
 ---
 
-## 🔍 9. Search & Text Processing
+## 7. Networking
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `grep <pattern> <file>` | Search pattern in file | `grep 'error' log.txt` |
-| `find <dir> -name <name>` | Find file by name | `find /home -name '*.txt'` |
-
----
-
-## 🗜️ 10. Archiving & Compression
-
-| Command | Description | Example |
-|--------|-------------|---------|
-| `tar -cvf` | Create archive | `tar -cvf archive.tar file1 file2` |
-| `gzip` | Compress to `.gz` | `gzip file.txt` |
-| `gunzip` | Decompress `.gz` | `gunzip file.txt.gz` |
-| `xz` | Compress to `.xz` | `xz file.txt` |
-| `unxz` | Decompress `.xz` | `unxz file.txt.xz` |
-| `zip` | Create zip file | `zip archive.zip file1 file2` |
-| `unzip` | Extract zip | `unzip archive.zip` |
+| Command           | Description                  | Example                     |
+|-------------------|------------------------------|-----------------------------|
+| `ip a`            | Display IP addresses          | `ip a`                      |
+| `ifconfig`        | Configure network interfaces  | `ifconfig`                  |
+| `ping <host>`     | Send ICMP echo requests       | `ping google.com`           |
+| `traceroute <host>`| Trace route to network host   | `traceroute google.com`     |
+| `nslookup <domain>`| Query DNS records             | `nslookup google.com`       |
+| `curl <url>`      | Transfer data to/from server  | `curl http://example.com`   |
+| `wget <url>`      | Download files from web       | `wget http://example.com/file.zip` |
+| `dig`             | Query DNS name servers        | `dig google.com`            |
+| `ssh`             | Secure remote login           | `ssh user@192.168.1.10`     |
+| `scp`             | Secure copy files between systems | `scp file.txt user@192.168.1.10:/home/user/` |
+| `ftp`             | Connect to FTP server         | `ftp ftp.example.com`       |
 
 ---
 
-## 📦 11. Package Management
+## 8. Disk Management
 
-| Command | Description | Example |
-|--------|-------------|---------|
-| `apt-get` | Debian/Ubuntu package manager | `sudo apt-get install nginx` |
-| `yum` | RHEL/CentOS package manager | `sudo yum install httpd` |
-
----
-
-## 📄 Download
-
-You can download the complete cheat sheet in Word format here:  
-📥 [Linux-Basic-Commands.docx](Linux-Basic-Commands.docx)
+| Command                | Description                 | Example                |
+|------------------------|-----------------------------|------------------------|
+| `lsblk`                | List block devices          | `lsblk`                |
+| `fdisk -l`             | List disk partitions        | `fdisk -l`             |
+| `mkfs.ext4 <device>`   | Create ext4 filesystem      | `mkfs.ext4 /dev/sdb1`  |
+| `mount <device> <dir>` | Mount a filesystem          | `mount /dev/sdb1 /mnt/data` |
+| `umount <dir>`         | Unmount a filesystem        | `umount /mnt/data`     |
+| `sudo nano /etc/fstab` | Edit filesystem table       | `sudo nano /etc/fstab` |
 
 ---
 
-## 👨‍💻 Author
+## 9. Search and Text Processing
 
-**Fiaz Shafqat** – Cloud & DevOps Engineer  
-🔗 [LinkedIn Profile](https://www.linkedin.com/in/fiazshafqat)
+| Command                 | Description                      | Example                    |
+|-------------------------|---------------------------------|----------------------------|
+| `grep <pattern> <file>`  | Search for a pattern in a file   | `grep 'error' log.txt`     |
+| `find <dir> -name <name>` | Search files in directory hierarchy | `find /home -name '*.txt'` |
 
 ---
+
+## 10. Archiving & Compression
+
+| Command          | Description                   | Example                   |
+|------------------|-------------------------------|---------------------------|
+| `tar`            | Archive files into .tar format | `tar -cvf archive.tar file1 file2` |
+| `gzip`           | Compress a file to .gz format  | `gzip file.txt`           |
+| `gunzip`         | Decompress a .gz file          | `gunzip file.txt.gz`      |
+| `xz`             | Compress a file to .xz format  | `xz file.txt`             |
+| `unxz`           | Decompress a .xz file          | `unxz file.txt.xz`        |
+| `zip`            | Compress into .zip archive     | `zip archive.zip file1 file2` |
+| `unzip`          | Extract from .zip archive      | `unzip archive.zip`       |
+
+---
+
+## 11. Package Management
+
+| Command             | Description                        | Example                       |
+|---------------------|-----------------------------------|-------------------------------|
+| `apt-get`           | Install/remove packages (Debian/Ubuntu) | `sudo apt-get install nginx`  |
+| `yum`               | Install/remove packages (RHEL/CentOS)   | `sudo yum install httpd`      |
+
 
