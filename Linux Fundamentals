@@ -1,0 +1,196 @@
+# Linux Cheat Sheet for Cloud & DevOps Engineer
+
+A practical reference guide covering fundamental Linux commands, system management, networking, and DevOps-related operations. Suitable for beginners and professionals.
+
+---
+
+## 📁 1. Linux Directory Structure
+
+| Directory | Description |
+|----------|-------------|
+| `/` | Root directory |
+| `/bin` | Essential user binaries |
+| `/sbin` | System binaries |
+| `/etc` | System configuration files |
+| `/dev` | Device files |
+| `/proc` | Virtual filesystem for kernel and process info |
+| `/var` | Variable data files (logs, dbs) |
+| `/tmp` | Temporary files |
+| `/home` | User home directories |
+| `/boot` | Boot loader files |
+| `/mnt` | Mount point for temporary mounts |
+| `/opt` | Optional third-party packages |
+| `/media` | Mount point for removable media |
+
+---
+
+## 👥 2. User and Group Management
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `useradd <username>` | Add a new user | `useradd test` |
+| `adduser <username>` | Add user with home dir | `adduser test1` |
+| `passwd <username>` | Set user password | `passwd test` |
+| `userdel <username>` | Delete a user | `userdel test` |
+| `passwd -l <username>` | Lock user account | `passwd -l test` |
+| `passwd -u <username>` | Unlock user account | `passwd -u test` |
+| `usermod -l <new> <old>` | Rename user | `usermod -l test2 test` |
+| `groupadd <groupname>` | Add new group | `groupadd IT` |
+| `groupdel <groupname>` | Delete group | `groupdel IT` |
+| `usermod -aG <group> <user>` | Add user to group | `usermod -aG IT test` |
+
+---
+
+## 📂 3. File and Directory Operations
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `ls` | List contents | `ls` |
+| `ls -l` | Detailed list | `ls -l` |
+| `pwd` | Show current directory | `pwd` |
+| `cd <dir>` | Change directory | `cd /home` |
+| `mkdir <dir>` | Create directory | `mkdir newfolder` |
+| `rm <file>` | Remove file | `rm file.txt` |
+| `rmdir <dir>` | Remove empty dir | `rmdir newfolder` |
+| `touch <file>` | Create file | `touch newfile.txt` |
+| `cp <src> <dst>` | Copy files | `cp file.txt /backup/` |
+| `mv <src> <dst>` | Move/rename file | `mv old.txt new.txt` |
+| `cat <file>` | Show file content | `cat file.txt` |
+| `head <file>` | First 10 lines | `head -10 file.txt` |
+| `tail <file>` | Last 10 lines | `tail -10 file.txt` |
+| `vi <file>` | Open in vi | `vi file.txt` |
+| `vim <file>` | Open in vim | `vim file.txt` |
+
+---
+
+## 🔐 4. File Permissions
+
+### Permission Values:
+| Permission | Symbol | Value |
+|------------|--------|-------|
+| Read | `r` | 4 |
+| Write | `w` | 2 |
+| Execute | `x` | 1 |
+
+> Examples:
+> - `rwx` = 7  
+> - `rw-` = 6  
+> - `r--` = 4  
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `chmod <mode> <file>` | Change permissions | `chmod 444 file.txt` |
+| `chown <user>:<group> <file>` | Change owner/group | `chown test:IT file.txt` |
+
+---
+
+## ⚙️ 5. Process Management
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `ps` | List processes | `ps` |
+| `ps aux` | Detailed info | `ps aux` |
+| `ps -ef` | Full format | `ps -ef` |
+| `kill <pid>` | Kill process | `kill 1234` |
+| `kill -9 <pid>` | Force kill | `kill -9 1234` |
+| `kill -STOP <pid>` | Pause process | `kill -STOP 1234` |
+| `kill -CONT <pid>` | Resume process | `kill -CONT 1234` |
+
+---
+
+## 🧠 6. System Info & Monitoring
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `uname -a` | System info | `uname -a` |
+| `hostnamectl` | Hostname info | `hostnamectl` |
+| `uptime` | System uptime | `uptime` |
+| `whoami` | Current user | `whoami` |
+| `lscpu` | CPU info | `lscpu` |
+| `top` | Task manager | `top` |
+| `htop` | Interactive tasks | `htop` |
+| `free -h` | Memory usage | `free -h` |
+| `df -h` | Disk usage | `df -h` |
+| `du -sh <dir>` | Dir size | `du -sh /home/user` |
+| `vmstat` | VM stats | `vmstat` |
+| `nproc` | CPU cores | `nproc` |
+
+---
+
+## 🌐 7. Networking
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `ip a` | Show IP addresses | `ip a` |
+| `ifconfig` | Network config | `ifconfig` |
+| `ping <host>` | Test connection | `ping google.com` |
+| `traceroute <host>` | Trace path | `traceroute google.com` |
+| `nslookup <domain>` | DNS lookup | `nslookup google.com` |
+| `dig` | DNS queries | `dig google.com` |
+| `curl <url>` | HTTP request | `curl http://example.com` |
+| `wget <url>` | Download file | `wget http://example.com/file.zip` |
+| `ssh user@host` | Remote login | `ssh user@192.168.1.10` |
+| `scp <file> user@host:/path` | Secure copy | `scp file.txt user@host:/home/user/` |
+| `ftp <host>` | FTP access | `ftp ftp.example.com` |
+
+---
+
+## 💾 8. Disk Management
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `lsblk` | List block devices | `lsblk` |
+| `fdisk -l` | List partitions | `fdisk -l` |
+| `mkfs.ext4 <device>` | Format partition | `mkfs.ext4 /dev/sdb1` |
+| `mount <device> <dir>` | Mount device | `mount /dev/sdb1 /mnt/data` |
+| `umount <dir>` | Unmount device | `umount /mnt/data` |
+| `sudo nano /etc/fstab` | Persistent mount config | `sudo nano /etc/fstab` |
+
+---
+
+## 🔍 9. Search & Text Processing
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `grep <pattern> <file>` | Search pattern in file | `grep 'error' log.txt` |
+| `find <dir> -name <name>` | Find file by name | `find /home -name '*.txt'` |
+
+---
+
+## 🗜️ 10. Archiving & Compression
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `tar -cvf` | Create archive | `tar -cvf archive.tar file1 file2` |
+| `gzip` | Compress to `.gz` | `gzip file.txt` |
+| `gunzip` | Decompress `.gz` | `gunzip file.txt.gz` |
+| `xz` | Compress to `.xz` | `xz file.txt` |
+| `unxz` | Decompress `.xz` | `unxz file.txt.xz` |
+| `zip` | Create zip file | `zip archive.zip file1 file2` |
+| `unzip` | Extract zip | `unzip archive.zip` |
+
+---
+
+## 📦 11. Package Management
+
+| Command | Description | Example |
+|--------|-------------|---------|
+| `apt-get` | Debian/Ubuntu package manager | `sudo apt-get install nginx` |
+| `yum` | RHEL/CentOS package manager | `sudo yum install httpd` |
+
+---
+
+## 📄 Download
+
+You can download the complete cheat sheet in Word format here:  
+📥 [Linux-Basic-Commands.docx](Linux-Basic-Commands.docx)
+
+---
+
+## 👨‍💻 Author
+
+**Fiaz Shafqat** – Cloud & DevOps Engineer  
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/fiazshafqat)
+
+---
+
