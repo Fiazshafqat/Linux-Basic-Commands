@@ -163,7 +163,16 @@
 | `unzip`          | Extract from .zip archive      | `unzip archive.zip`       |
 
 ---
+## 11. File Transfer & Synchronization
 
+| Command          | Description                              | Example |
+|------------------|------------------------------------------|---------|
+| `scp`            | Securely copy files between systems using SSH | `scp file.txt user@192.168.1.10:/home/user/` |
+| `scp -r`         | Securely copy directories recursively     | `scp -r myfolder user@192.168.1.10:/home/user/` |
+| `rsync`          | Synchronize files/directories efficiently | `rsync -av file.txt /backup/` |
+| `rsync -avz`     | Sync files with compression and verbose output | `rsync -avz project/ user@192.168.1.10:/backup/` |
+| `rsync --delete` | Delete destination files not present in source | `rsync -av --delete source/ backup/` |
+---
 ## 11. Package Management
 
 | Command             | Description                        | Example                       |
